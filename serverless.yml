@@ -1,0 +1,59 @@
+org: mariosuaza
+
+service: parcial
+
+plugins:
+  - serverless-offline
+  - serverless-python-requirements
+
+provider:
+  name: aws
+  runtime: python3.12
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:GetItem"
+      Resource:
+        - "*"
+
+functions:
+  SaludoSimple:
+    name : saludo-simple-serverless
+    handler: lambdas.handler.hello
+    events:
+      - http:
+          path: /saludosimple
+          method: GET
+
+  SaludoPersonalizado:
+    handler: lambdas.punto2.hello
+    name : saludo-personalizado-serverless
+    events:
+      - http:
+          path: /saludopersonalizado
+          method: GET
+
+  CalculadoraBasica:
+    handler: lambdas.punto3.calculadora_lambda
+    name: calculadora-basica-serverless
+    events:
+      - http:
+          path: /calculadora 
+          method: GET
+
+  ProcesamientoTexto:
+    handler: lambdas.punto4.procesamiento_texto_lambda
+    name: procesamiento-texto-serverless
+    events:
+      - http:
+          path: /texto
+          method: POST
+  
+  ConexionDynamoDB:
+    handler: lambdas.punto5.consultar_estudiante
+    name: consulta-estudiante-dynamoDB-serverless
+    events:
+      - http:
+          path: /consultar-estudiante
+          method: GET
+
