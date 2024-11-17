@@ -1,6 +1,6 @@
 service: parcial
 
-frameworkVersion: "3"
+frameworkVersion: "3"
 
 plugins:
   - serverless-offline
